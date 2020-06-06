@@ -177,39 +177,39 @@ A short questionarie will start, there are a lot of different possible configura
 
 The first question is related to how ESLint will be used, the idea is to be able to check syntax, find problems and enforce code style using a famous and useful style guide
 
-![ESLint1](https://drive.google.com/open?id=1xl27S5HjwFjkX15w3z0o28kA63RuuJTE)
+![ESLint1](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_001.png)
 
 In the current project, babel will not be used (Mainly used in React, Vue, ...), select "__CommonJS__"
 
-![ESLint2](https://drive.google.com/open?id=157IRFbUjg_Bf0eARRNn6dAVZzcUdMmAV)
+![ESLint2](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_002.png)
 
 According to the previous answer, the shown frameworks will not be used
 
-![ESLint3](https://drive.google.com/open?id=1uCk5Zq_S_3jbtZcGEHW7gO4hn1ZZUx-g)
+![ESLint3](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_003.png)
 
 Neither TypeScript will be used
 
-![ESLint4](https://drive.google.com/open?id=171A3TOf30t9Og2hcQ7TWQhitugTkMuOs)
+![ESLint4](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_004.png)
 
 "__Node__" is the option to run the code
 
-![ESLint5](https://drive.google.com/open?id=1lPJ4c7Y3mJOqOIBZqdqLF1hwOraPpGtz)
+![ESLint5](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_005.png)
 
 As it was mentioned previously, the focus is to use a popular style guide
 
-![ESLint6](https://drive.google.com/open?id=18h2twcMUYH34o7OUPcRqNpbAlrJkLY6L)
+![ESLint6](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_006.png)
 
 There are different kind of style guides, it is not easy to say which one it is better than the others. The selection for this question is the one from __Airbnb__
 
-![ESLint7](https://drive.google.com/open?id=11m7vCNaaWrKceX8tu9QC06ya9JVMfqWk)
+![ESLint7](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_007.png)
 
 There are different formats to create the configuration file, one of the most used is as a **JSON**
 
-![ESLint8](https://drive.google.com/open?id=1NKidn-joxmaHB1GOyPnnzkNNfHCm10OT)
+![ESLint8](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_008.png)
 
 Finally, it is time to install the required dependencies via **npm**
 
-![ESLint9](https://drive.google.com/open?id=1qHAG8ovYSi0aZF1tjbotQ6_mrTiSPE1D)
+![ESLint9](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_009.png)
 
 After that, a new file called __.eslintrc.json__ will be created. This file stores all the configuration that has been just set
 
