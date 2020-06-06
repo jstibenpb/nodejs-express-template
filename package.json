@@ -13,8 +13,8 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint . --fix",
-      "prettier-eslint --write \"$PWD/{,!(node_modules)/**/}*.{js,json}\""
+      "npm run lint:fix",
+      "git add"
     ]
   },
   "husky": {
