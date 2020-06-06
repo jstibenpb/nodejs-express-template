@@ -177,7 +177,7 @@ A short questionarie will start, there are a lot of different possible configura
 
 The first question is related to how ESLint will be used, the idea is to be able to check syntax, find problems and enforce code style using a famous and useful style guide
 
-![ESLint1](https://drive.google.com/open?id=1xl27S5HjwFjkX15w3z0o28kA63RuuJTE)
+![ESLint1](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_001.png)
 
 In the current project, babel will not be used (Mainly used in React, Vue, ...), select "__CommonJS__"
 
