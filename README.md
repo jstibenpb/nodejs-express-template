@@ -358,8 +358,8 @@ Last step is to create two new custom scripts to execute the tool as follows
 ```javascript
   {
     /// ...
-    "format": "prettier-eslint \"{,!(node_modules)/**/}*.{js,json}\"",
-    "format:fix": "prettier-eslint --write \"{,!(node_modules)/**/}*.{js,json}\"",
+    "format": "prettier-eslint \"$PWD/{,!(node_modules)/**/}*.{js,json}\"",
+    "format:fix": "prettier-eslint --write \"$PWD/{,!(node_modules)/**/}*.{js,json}\"",
     /// ...
   }
 ```
@@ -398,16 +398,16 @@ Then, file __package.json__ needs to be modified adding these new lines
 ```javascript
   /// ...
   "lint-staged": {
-      "*.js": [
-        "eslint . --fix", /////////////////////////
-        "prettier-eslint --write \"$PWD/{,!(node_modules)/**/}*.{js,json}\""
-      ]
-    },
-    "husky": {
-      "hooks": {
-        "pre-commit": "lint-staged"
-      }
-    },
+    "*.js": [
+      "npm run lint:fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   /// ...
 ```
 
@@ -420,16 +420,17 @@ File __package.json__ should look like
     "description": "",
     "main": "index.js",
     "scripts": {
+      "dev": "nodemon index.js",
       "lint": "eslint .",
       "lint:fix": "eslint . --fix",
-      "format": "prettier-eslint \"{,!(node_modules)/**/}*.{js,json}\"",
-      "format:fix": "prettier-eslint --write \"{,!(node_modules)/**/}*.{js,json}\"",
+      "format": "prettier-eslint \"$PWD/{,!(node_modules)/**/}*.{js,json}\"",
+      "format:fix": "prettier-eslint --write \"$PWD/{,!(node_modules)/**/}*.{js,json}\"",
       "test": "echo \"Error: no test specified\" && exit 1"
     },
     "lint-staged": {
       "*.js": [
-        "eslint . --fix",
-        "prettier-eslint --write \"$PWD/{,!(node_modules)/**/}*.{js,json}\""
+        "npm run lint:fix",
+        "git add"
       ]
     },
     "husky": {
@@ -440,14 +441,18 @@ File __package.json__ should look like
     "author": "",
     "license": "ISC",
     "dependencies": {
-      "express": "^4.17.1",
+      "express": "^4.17.1"
     },
     "devDependencies": {
       "eslint": "^6.8.0",
       "eslint-config-airbnb-base": "^14.1.0",
+      "eslint-config-prettier": "^6.11.0",
       "eslint-plugin-import": "^2.20.2",
+      "eslint-plugin-prettier": "^3.1.3",
       "husky": "^4.2.5",
-      "lint-staged": "^10.2.6"
+      "lint-staged": "^10.2.9",
+      "prettier": "^2.0.5",
+      "prettier-eslint-cli": "^5.0.0"
     }
   }
 ```
