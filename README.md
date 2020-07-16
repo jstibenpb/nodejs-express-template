@@ -1,12 +1,13 @@
 # Node.JS Express template
 
-The idea with this small and simple project is to show and explain how a scalable template could be built using an MVC architectural pattern and a style guide, the last one pretend to enforce good practices. This is so important because at the beginning a developer often starts coding just with the goal to make the code works but this is not enough, it is important that developers could understand what they are doing and how they could create code more scalable and sustainable without falling in bad practices or implementations
+The idea with this small and simple project is to show and explain how a scalable template could be built using an MVC architectural pattern and a style guide, the last one pretend to enforce good practices. This is so important because at the beginning a developer often starts coding just with the goal to make the code work but this is not enough, it is important that developers could understand what they are doing and how they could create code more scalable and sustainable without falling in bad practices or implementations
 
 ## Objectives
 
 - Build a simple Node.js server by using __express__
 - Configure some tools to enhance our way to develop (__Nodemon__, __ESLint__, __Prettier__, __Lint-staged__, __Husky__)
 - Show and briefly explain a possible template to start building amazing apps using __express__
+- Create middlewares to validate user authorizations, Joi schemas and get relevant Geo ip data
 
 ## Concepts
 
@@ -177,39 +178,39 @@ A short questionarie will start, there are a lot of different possible configura
 
 The first question is related to how ESLint will be used, the idea is to be able to check syntax, find problems and enforce code style using a famous and useful style guide
 
-![ESLint1](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_001.png)
+![ESLint1](https://storage.googleapis.com/project_pictures/nodeJS-express-template/ESLint/eslint_001.png)
 
 In the current project, babel will not be used (Mainly used in React, Vue, ...), select "__CommonJS__"
 
-![ESLint2](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_002.png)
+![ESLint2](https://storage.googleapis.com/project_pictures/nodeJS-express-template/ESLint/eslint_002.png)
 
 According to the previous answer, the shown frameworks will not be used
 
-![ESLint3](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_003.png)
+![ESLint3](https://storage.googleapis.com/project_pictures/nodeJS-express-template/ESLint/eslint_003.png)
 
 Neither TypeScript will be used
 
-![ESLint4](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_004.png)
+![ESLint4](https://storage.googleapis.com/project_pictures/nodeJS-express-template/ESLint/eslint_004.png)
 
 "__Node__" is the option to run the code
 
-![ESLint5](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_005.png)
+![ESLint5](https://storage.googleapis.com/project_pictures/nodeJS-express-template/ESLint/eslint_005.png)
 
 As it was mentioned previously, the focus is to use a popular style guide
 
-![ESLint6](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_006.png)
+![ESLint6](https://storage.googleapis.com/project_pictures/nodeJS-express-template/ESLint/eslint_006.png)
 
 There are different kind of style guides, it is not easy to say which one it is better than the others. The selection for this question is the one from __Airbnb__
 
-![ESLint7](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_007.png)
+![ESLint7](https://storage.googleapis.com/project_pictures/nodeJS-express-template/ESLint/eslint_007.png)
 
 There are different formats to create the configuration file, one of the most used is as a **JSON**
 
-![ESLint8](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_008.png)
+![ESLint8](https://storage.googleapis.com/project_pictures/nodeJS-express-template/ESLint/eslint_008.png)
 
 Finally, it is time to install the required dependencies via **npm**
 
-![ESLint9](https://storage.googleapis.com/images_projects/nodeJS-express-template/ESLint/eslint_009.png)
+![ESLint9](https://storage.googleapis.com/project_pictures/nodeJS-express-template/ESLint/eslint_009.png)
 
 After that, a new file called __.eslintrc.json__ will be created. This file stores all the configuration that has been just set
 
@@ -483,10 +484,15 @@ nodeJS-express-template
 |   .prettierrc.json
 |   app.js
 |   config.js
+|   Dockerfile
 |   index.js
 |   package-lock.json
 |   package.json
 │   README.md
+└───middlewares
+    |   getData.js
+    |   validateAuth.js
+    |   validateSchemas.js
 └───routes
     |   index.js
 └───services
@@ -498,6 +504,8 @@ nodeJS-express-template
             │   index.js
         └───models
             │   mongoose.js
+        └───utils
+            │   schemasValidation.js
 ```
 
 Let's define them
@@ -514,38 +522,49 @@ Let's define them
 
 - __config.js__: File that contains project configurations as port listening and some default values for important variables
 
+- __Dockerfile__: Set of commands needed to assemble an image
+
 - __index.js__: Entry point of the application. The file defines the server configuration
 
 - __package-lock.json__: Automatic generated file for any operation in which __npm__ modifies the project
 
 - __package.json__: File that contains relevant data to the project as installed packages, configured tools, ...
 
-- __routes/index.js__: File that summarizes all API paths in the project. Specific paths will be define in each module of the application
+- __middlewares__: Folder that contains relevant middlewares to use in the project
 
-- __services/mongoose.js__: Connection to the database, a _MongoDB_ is used in this particular case. The connection is exported to make it accessible from the controller. If there are more connections, create different files for each of them on the folder _services_
+- __middlewares/getData__: Middleware in charge of extract information about the requests, for example: Geo IP data
+
+- __middlewares/validateAuth__: Middleware in charge of validate the user authorization
+
+- __middlewares/validateSchemas__: Middleware in charge of validate the input data by using a schema description language
+
+- __routes/index.js__: File that summarizes all API paths in the project, in addition to middlewares. Specific paths will be define in each module of the application
+
+- __services/mongoose.js__: Connection to the database, _Mongoose_ is used in this particular case. The connection is exported to make it accessible from the controller. If there are more connections, they must be created in different files in _services_
 
 - __src__: Folder that contains the business and data logic for each module
 
-- __users__: Name of one module that the application contains
+- __users__: One module of the application
 
 - __users/routes.js__: File that contains all paths for the module _users_
 
-- __users/routes.js__: File that contains all paths for the module _users_
-
-- __users/controller/index.js__: File that contains logic business for the module _users_. Basically, the set of functions that bring the APIs to life are defined and implemented here
+- __users/controller/index.js__: File that contains logic business for the module _users_. Basically, the set of functions that brings the APIs to life are defined and implemented here
 
 - __users/models/mongoose.js__: File in which the _Mongoose_ models are defined assuming that _MongoDB_ is the database selected for the application
 
-As it can be seen, the application is split in different pieces. Each module has its own models and controllers, everything is disengaged. It allows to have notion of the entire project, modify components in an easy way and scalable the app with new components easily
+- __users/utils__: Additional resources that the module could need
 
-In the branch __template__ there is an example of a basic application in which there are two APIs: one to save user's data and the second one to get all created name's users
+- __users/utils/schemasValidation__: Schemas are defined to validate the input data according to some requirements the module could have
+
+As it can be seen, the application is split in different pieces. Each module has its own models and controllers, everything is disengaged. It allows to have notion of the entire project, modify components in an easy and scalable way
+
+In the branch __template__ there is an example of a basic API. It creates a new user and returns a valid token to make subsequent requests
 
 ### Assumptions
 
 - A database is already created and ready to use (if not, check __MongoDB Atlas__, easy and fast way to run a database in the cloud)
-- MongoDB url is load from a environment variable for security
-- First API (save data) receives the following keys: _name_, _lastName_, _city_, _phone_ and the HTTP verb is a _POST_
-- Second API (get users) do not receive any parameter and the HTTP verb is a _GET_
+- MongoDB url is loaded from a .env file
+- JWT API key and expire time are load from a .env file
 
 ### Test it
 
@@ -559,16 +578,15 @@ After cloning the project is needed to install __ESLint__ and __nodemon__ global
 
 Now, the application should be running and ready to test. One possible option to test it is with the help of _Postman_
 
-- POST: __localhost:5000/users/api/v1/newUser__ (in addition to the data to save)
-- GET: __localhost:5000/users/api/v1/list__
+- POST: __localhost:5000/users/api/v1/signup (see parameters in the schema of the model _users_)
+
 
 ## Next improvements
 
-- Schema validation using __@hapi/joi__
+- Explanation about how the different created middlewares were configured and how they work
 - APIs documentation using __Swagger__
 - Default error handle
 - Dynamic routes creation
-- App containerization (Docker)
 - Deploy the Docker to GCP and AWS (CD)
 
 ## References
@@ -576,6 +594,9 @@ Now, the application should be running and ready to test. One possible option to
 - [npm](https://www.npmjs.com/)
 - [express](https://expressjs.com/)
 - [prettier](https://github.com/prettier/prettier-eslint)
+- [hapi/joi](https://hapi.dev/module/joi/)
+- [JWT](https://www.npmjs.com/package/jsonwebtoken)
+- [express-ip](https://www.npmjs.com/package/express-ip)
 
 ## Contributing
 
